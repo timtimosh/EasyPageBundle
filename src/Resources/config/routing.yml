@@ -1,0 +1,7 @@
+easypage_index:
+    path:  /
+    controller: Mtt\EasyPageBundle\Controller\Page::index
+
+easypage_show:
+    path:  /{slug}
+    controller: Mtt\EasyPageBundle\Controller\Page::show

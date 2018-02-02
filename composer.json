@@ -1,0 +1,23 @@
+{
+    "name": "mtt/easy-page-bundle",
+    "description": "symfony easy page bundle",
+    "authors": [
+        {
+            "name": "tymosh",
+            "email": "mrtimosh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "symfony/symfony": "~3.4.0",
+        "egeloen/ckeditor-bundle": "~6.0.0",
+        "vich/uploader-bundle": "~1.8.1",
+        "liip/imagine-bundle": "~1.9.1",
+        "cocur/slugify": "~v3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mtt\\EasyPageBundle\\": "src/"
+        }
+    }
+}

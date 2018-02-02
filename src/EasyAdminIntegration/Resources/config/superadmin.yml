@@ -1,0 +1,19 @@
+easy_admin:
+    entities:
+        Pages:
+            class: '%mtt_easy_page.page_entity%'
+            controller: Mtt\EasyPageBundle\EasyAdminIntegration\Controller\PageController
+            form:  # <-- 'form' is applied to both 'new' and 'edit' views
+                fields:
+                    - name
+                    - parent
+                    - active
+                    - { property: 'descriptionShort', type: 'ckeditor' }
+                    - { property: 'description', type: 'ckeditor' }
+                    - name
+                    - slug
+                    - listTemplate
+                    - pageTemplate
+                    - { property: 'mainImageFile', type: 'vich_image' }
+            list:
+                fields: ['id', { property: 'mainImage', template: '@easypage_templates\easy_admin\vich_uploader_image.html.twig', base_path: '%app.path.easypage_images%' }, 'name', 'descriptionShort', 'active']
