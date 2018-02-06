@@ -13,7 +13,8 @@
         "egeloen/ckeditor-bundle": "~6.0.0",
         "vich/uploader-bundle": "~1.8.1",
         "liip/imagine-bundle": "~1.9.1",
-        "cocur/slugify": "~v3.1"
+        "cocur/slugify": "~v3.1",
+        "knplabs/knp-paginator-bundle": "~v2.7.2"
     },
     "autoload": {
         "psr-4": {

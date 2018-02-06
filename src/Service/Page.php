@@ -4,7 +4,7 @@ namespace Mtt\EasyPageBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Mtt\EasyPageBundle\Model\PageEntityInterface;
-
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class Page
 {
@@ -13,11 +13,23 @@ class Page
      * @var \Cocur\Slugify\Slugify
      */
     protected $slugger;
+    /**
+     * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    protected $router;
 
-    public function __construct(EntityManager $entityManager, \Cocur\Slugify\SlugifyInterface  $slugger)
+    public function __construct(EntityManager $entityManager, \Cocur\Slugify\SlugifyInterface $slugger, \Symfony\Component\Routing\RouterInterface $routerSerivce)
     {
         $this->em = $entityManager;
         $this->slugger = $slugger;
+        $this->router = $routerSerivce;
+    }
+
+    /**
+     * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
+     */
+    public function getEntitySlug($entity):string{
+        return $this->router->generate('easypage_show', array('slug' => $entity->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     /**
