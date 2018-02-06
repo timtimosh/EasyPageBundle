@@ -3,60 +3,98 @@
 namespace Mtt\EasyPageBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use Mtt\EasyPageBundle\Model\PageEntityInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class Page
+use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Mtt\EasyPageBundle\Service\PageInterface as PageServiceInterface;
+
+/**
+ * Class Page
+ * @package Mtt\EasyPageBundle\Service
+ * TODO test for this service
+ */
+class Page implements PageServiceInterface
 {
     protected $em;
-    /**
-     * @var \Cocur\Slugify\Slugify
-     */
-    protected $slugger;
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
-     */
-    protected $router;
 
-    public function __construct(EntityManager $entityManager, \Cocur\Slugify\SlugifyInterface $slugger, \Symfony\Component\Routing\RouterInterface $routerSerivce)
+    protected $slugger;
+
+    protected $classEntity;
+
+    /**
+     * Page constructor.
+     * @param EntityManager $entityManager
+     * @param $slugger \Mtt\EasyPageBundle\Service\Slugger
+     * @param $classEntity string
+     */
+    public function __construct(EntityManager $entityManager, $slugger, $classEntity)
     {
         $this->em = $entityManager;
         $this->slugger = $slugger;
-        $this->router = $routerSerivce;
+        $this->classEntity = $classEntity;
     }
 
     /**
      * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
      */
-    public function getEntitySlug($entity):string{
-        return $this->router->generate('easypage_show', array('slug' => $entity->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL);
+    public function getPageUrl(\Mtt\EasyPageBundle\Entity\PageEntityInterface $entity): string
+    {
+        return $this->slugger->slugify($entity->getSlug());
     }
 
     /**
      * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
      */
-    public function savePage($entity){
-        $this->beforeSave($entity);
+    public function updatePage($entity, $flush = true)
+    {
+        $this->beforeUpdate($entity);
         $this->em->persist($entity);
-        $this->em->flush();
+        if ($flush) {
+            $this->em->flush();
+        }
+        $this->afterUpdate($entity);
     }
 
+    /**
+     * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
+     */
+    public function savePage($entity, $flush = true)
+    {
+        $this->updatePage($entity, $flush);
+    }
 
-    protected function beforeSave($entity){
+    /**
+     * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
+     */
+    public function deletePage($entity)
+    {
+        $this->em->remove($entity);
+        $this->flush();
+    }
+
+    public function createPage()
+    {
+        return new $this->classEntity;
+    }
+
+    protected function beforeUpdate($entity)
+    {
         $this->normalizeSlug($entity);
     }
 
-    /**
-     * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
-     */
-    protected function normalizeSlug($entity){
-        if(null === $entity->getSlug()){
+    protected function afterUpdate($entity)
+    {
+    }
+
+    protected function normalizeSlug(PageEntityInterface $entity)
+    {
+        if (null === $entity->getSlug()) {
             $entity->setSlug(
                 $this->slugger->slugify($entity->getName())
             );
         }
-        $normalizedUrl = $this->slugger->slugify($entity->getSlug());
-
-        $entity->setSlug($normalizedUrl);
+        $normalizedSlug = $this->slugger->slugify($entity->getSlug());
+        $entity->setSlug($normalizedSlug);
     }
+
 }

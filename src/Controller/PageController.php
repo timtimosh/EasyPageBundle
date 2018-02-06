@@ -2,6 +2,8 @@
 
 namespace Mtt\EasyPageBundle\Controller;
 
+use Mtt\EasyPageBundle\Entity\BasePage;
+use Mtt\EasyPageBundle\Repository\BasePageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -9,7 +11,7 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrap3View;
 
-use LittleHouse\EasyPageBundle\Entity\Page;
+use Mtt\EasyPageBundle\Entity\PageEntityInterface;
 
 /**
  * Page controller.
@@ -17,18 +19,23 @@ use LittleHouse\EasyPageBundle\Entity\Page;
  */
 class PageController extends Controller
 {
+    protected function getLimit()
+    {
+        return 10;
+    }
+
     /**
      * Lists all Page entities.
      *
      */
     public function listAction(Request $request)
     {
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
 
         $pagination = $paginator->paginate(
-            $this->getPageRepository()->findAllActive(), /* query NOT result */
+            $this->getPageRepository()->findActive(), /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            10/*limit per page*/
+            $this->getLimit()/*limit per page*/
         );
 
         // parameters to template
@@ -39,18 +46,33 @@ class PageController extends Controller
 
     /**
      * Finds and displays a Page entity.
+     * @var $page BasePage
      *
      */
-    public function showAction(Page $page)
+    public function showAction($slug)
     {
-        return $this->render('page/show.html.twig', array(
+        $page = $this->getPageRepository()->findOneActiveBySlug($slug);
+        $view = $this->getSinglePageTemplate($page);
+
+        return $this->render($view, array(
             'page' => $page,
         ));
     }
 
+    protected function getSinglePageTemplate($page):string {
+        if (null === $page->getPageTemplate() || '' === $page->getPageTemplate()) {
+            $view = '@easypage_templates/show.html.twig';
+        } else {
+            $view = $page->getPageTemplate();
+        }
+        return $view;
+    }
 
-
-    protected function getPageRepository(){
+    /**
+     * @return BasePageRepository
+     */
+    protected function getPageRepository()
+    {
         $em = $this->getDoctrine()->getManager();
         $pageEntity = $this->getParameter('mtt_easy_page.page_entity');
         return $em->getRepository($pageEntity);

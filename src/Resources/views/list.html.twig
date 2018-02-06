@@ -18,7 +18,7 @@
     {% for item in pagination %}
         <tr {% if loop.index is odd %}class="color"{% endif %}>
             <td>{{ item.id }}</td>
-            <td><a href="{{ easypage_service.getEntitySlug(item) }}">{{ item.name }}</a></td>
+            <td><a href="{{ easypage_service.getPageUrl(item) }}">{{ item.name }}</a></td>
             <td>{{ item.updatedAt|date("m/d/Y", false) }}</td>
 
         </tr>

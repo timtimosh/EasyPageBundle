@@ -7,6 +7,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminContr
 
 class PageController extends BaseAdminController
 {
+
+    public function createNewPageEntity(){
+        return $this->getPageService()->createPage();
+    }
+
+    public function persistPageEntity($page)
+    {
+        $this->getPageService()->updatePage($page, false);
+        parent::persistPageEntity($page);
+    }
+
     /**
      * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
      * @inheritdoc
@@ -29,15 +40,14 @@ class PageController extends BaseAdminController
         return $formBuilder->getForm();
     }
 
+
+
     /**
-     * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
+     * @return \Mtt\EasyPageBundle\Service\Page
      */
-    protected function getMainImagePath($entity): string
-    {
 
-        $imageSmall = 'reee.jpg';
-
-        return $imageSmall;
+    protected function getPageService(){
+        return $this->get('mtt_easypage.page.service');
     }
 
 }

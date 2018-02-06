@@ -16,6 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 abstract class BasePage implements PageEntityInterface
 {
+    const ALIAS = 'page_entity';
 
     const ACTIVE = 1;
     /**
@@ -30,7 +31,7 @@ abstract class BasePage implements PageEntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     protected $name;
 
@@ -130,7 +131,7 @@ abstract class BasePage implements PageEntityInterface
     protected $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     protected $mainImage;
