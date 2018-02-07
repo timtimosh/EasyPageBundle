@@ -1,7 +1,7 @@
-easypage_index:
+easypage_list:
     path:  /
-    controller: Mtt\EasyPageBundle\Controller\PageController::listAction
+    defaults: { _controller: MttEasyPageBundle:Page:list }
 
 easypage_show:
     path:  /{slug}
-    controller: Mtt\EasyPageBundle\Controller\PageController::showAction
+    defaults: { _controller: MttEasyPageBundle:Page:show }

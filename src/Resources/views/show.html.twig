@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
+{% if page.seoTitle != null %}
+    {% block title %}
+        {{ page.seoTitle }}
+    {% endblock %}
+{% endif %}
 {% block content %}
 
-    <div class="jumbotron">
-        <h1>{{ page.name }}</h1>
-        <p class="lead">
-            <img src="" alt="{{ page.name }}">
-        </p>
-    </div>
 
-    <div class="row marketing">
-        <div class="col-lg-12">
-            {{ page.description }}
-        </div>
-    </div>
+    <h1>{{ page.name }}</h1>
+
+
+    <img src="{{ asset(vich_uploader_asset(page, 'mainImageFile')) | imagine_filter('easypage_show_thumb') }}" alt="{{ page.name }}">
+    {{ page.description  | raw }}
 
 
 {% endblock %}

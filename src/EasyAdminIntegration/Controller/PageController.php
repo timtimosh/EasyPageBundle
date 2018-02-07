@@ -8,16 +8,23 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminContr
 class PageController extends BaseAdminController
 {
 
-    public function createNewPageEntity(){
+    public function createNewPagesEntity(){
         return $this->getPageService()->createPage();
     }
 
-    public function persistPageEntity($page)
+    public function persistPagesEntity($page)
     {
-        $this->getPageService()->updatePage($page, false);
-        parent::persistPageEntity($page);
+        $this->onUpdateOnCreatePageEntity($page);
     }
 
+    public function preUpdatePagesEntity($page)
+    {
+        $this->onUpdateOnCreatePageEntity($page);
+    }
+
+    protected function onUpdateOnCreatePageEntity($page){
+        $this->getPageService()->updatePage($page, false);
+    }
     /**
      * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
      * @inheritdoc
@@ -25,7 +32,7 @@ class PageController extends BaseAdminController
     protected function createPagesEntityForm($entity, $entityProperties, $view)
     {
         $formBuilder = $this->executeDynamicMethod('create<EntityName>EntityFormBuilder', array($entity, $view));
-        $smallImage = $this->getMainImagePath($entity);
+       // $smallImage = $this->getMainImagePath($entity);
        /* $formBuilder->add('mainImage', 'Sonata\MediaBundle\Form\Type\MediaType', array(
             'provider' => "sonata.media.provider.image",
             'context' => "default",

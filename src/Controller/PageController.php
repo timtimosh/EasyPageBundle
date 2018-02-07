@@ -52,8 +52,10 @@ class PageController extends Controller
     public function showAction($slug)
     {
         $page = $this->getPageRepository()->findOneActiveBySlug($slug);
+        if (!$page) {
+            throw $this->createNotFoundException('The page does not exist');
+        }
         $view = $this->getSinglePageTemplate($page);
-
         return $this->render($view, array(
             'page' => $page,
         ));
