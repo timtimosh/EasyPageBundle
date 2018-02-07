@@ -31,8 +31,6 @@ class MttEasyPageExtension  extends Extension implements PrependExtensionInterfa
         $myBundleConfig = $this->processConfiguration(new Configuration(), $configs);
 
         $container->setParameter('mtt_easy_page.page_entity', $myBundleConfig['page_entity']);
-        $container->setParameter('mtt_easy_page.image_entity', $myBundleConfig['image_entity']);
-        $container->setParameter('mtt_easy_page.gallery_entity', $myBundleConfig['gallery_entity']);
 
         if(isset($myBundleConfig['easy_admin_integration'])) {
             $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../EasyAdminIntegration/Resources/config'));
@@ -53,13 +51,17 @@ class MttEasyPageExtension  extends Extension implements PrependExtensionInterfa
      */
     public function process(ContainerBuilder $container)
     {
-        $interfaces = [
+   /*     $interfaces = [
             'Mtt\EasyPageBundle\Entity\PageEntityInterface' => $container->getParameter('mtt_easy_page.page_entity')
             ];
         $def = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
+
         foreach ($interfaces as $entityInterface => $resolvedClass){
             $def->addMethodCall('addResolveTargetEntity', array($entityInterface, $resolvedClass, array()));
         }
+        if(empty($def->getTag('doctrine.event_subscriber'))){
+            $def->addTag('doctrine.event_subscriber', array('connection' => 'default'));
+        }*/
       /*  $def = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
         dump($def);
         die($container->getParameter('mtt_easy_page.page_entity'));*/

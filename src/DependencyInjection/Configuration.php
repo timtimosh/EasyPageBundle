@@ -23,8 +23,6 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('page_entity')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('image_entity')->defaultNull()->cannotBeEmpty()->end()
-                ->scalarNode('gallery_entity')->defaultNull()->cannotBeEmpty()->end()
                 ->scalarNode('easy_admin_integration')->defaultNull()
             ->end()
         ->end();

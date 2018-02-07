@@ -16,7 +16,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 abstract class BasePage implements PageEntityInterface
 {
-    const ALIAS = 'page_entity';
 
     const ACTIVE = 1;
     /**

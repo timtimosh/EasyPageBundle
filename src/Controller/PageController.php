@@ -28,9 +28,11 @@ class PageController extends Controller
      * Lists all Page entities.
      *
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, \Mtt\CatalogBundle\Service\ProductFilter $filter)
     {
         $paginator = $this->get('knp_paginator');
+
+        $productCollection = $filter->loadProductCollectionFromRequest();
 
         $pagination = $paginator->paginate(
             $this->getPageRepository()->findActive(), /* query NOT result */
