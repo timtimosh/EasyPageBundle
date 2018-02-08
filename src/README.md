@@ -1,4 +1,5 @@
 #Here we go..Basic configuration 
+##you also may need to pay tour attention on ckeeditor bundle and how to install it
 
 ##app/config/routing.yml:
 
@@ -40,7 +41,7 @@ twig:
          '%kernel.project_dir%/vendor/mtt/easy-page-bundle/src/Resources/views': easypage_templates
 
 mtt_easy_page:
-    page_entity: LittleHouse\EasyPageBundle\Entity\Page
+    page_entity: YOURNAMESPACE\EasyPageBundle\Entity\Page
     easy_admin_integration: true
 
 ivory_ck_editor:
@@ -78,3 +79,13 @@ liip_imagine:
             filters:
                 thumbnail: { size: [300, 250], mode: outbound }
 ```
+
+
+#AppKernel:
+        ``` 
+        $bundles[] = new Mtt\EasyPageBundle\MttEasyPageBundle();
+        $bundles[] = new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle();
+        $bundles[] = new Vich\UploaderBundle\VichUploaderBundle();
+        $bundles[] = new Liip\ImagineBundle\LiipImagineBundle();
+        $bundles[] = new YOURNAMESPACE\EasyPageBundle\YOURNAMESPACEEasyPageBundle();
+        ```
