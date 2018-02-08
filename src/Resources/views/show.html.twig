@@ -9,10 +9,10 @@
 
     <h1>{{ page.name }}</h1>
 
-
+{% if vich_uploader_asset(page, 'mainImageFile') != null %}
     <img src="{{ asset(vich_uploader_asset(page, 'mainImageFile')) | imagine_filter('easypage_show_thumb') }}" alt="{{ page.name }}">
     {{ page.description  | raw }}
-
+{% endif %}
 
 {% endblock %}
 
