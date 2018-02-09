@@ -8,23 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminContr
 class PageController extends BaseAdminController
 {
 
-    public function createNewPagesEntity(){
+/*    public function createNewPagesEntity(){
         return $this->getPageService()->createPage();
-    }
+    }*/
 
-    public function persistPagesEntity($page)
-    {
-        $this->onUpdateOnCreatePageEntity($page);
-    }
 
-    public function preUpdatePagesEntity($page)
-    {
-        $this->onUpdateOnCreatePageEntity($page);
-    }
-
-    protected function onUpdateOnCreatePageEntity($page){
-        $this->getPageService()->updatePage($page, false);
-    }
     /**
      * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
      * @inheritdoc
@@ -50,11 +38,11 @@ class PageController extends BaseAdminController
 
 
     /**
-     * @return \Mtt\EasyPageBundle\Service\Page
+     * @return \Mtt\EasyPageBundle\Service\PageService
      */
 
-    protected function getPageService(){
+/*    protected function getPageService(){
         return $this->get('mtt_easypage.page.service');
-    }
+    }*/
 
 }

@@ -10,7 +10,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\MappedSuperclass
- * @ORM\HasLifecycleCallbacks()
  * @Vich\Uploadable
  */
 
@@ -145,8 +144,7 @@ abstract class BasePage implements PageEntityInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
+
     }
 
     /**
@@ -164,7 +162,7 @@ abstract class BasePage implements PageEntityInterface
         if (null !== $image) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedTimestamps();
         }
     }
 
@@ -417,12 +415,15 @@ abstract class BasePage implements PageEntityInterface
         $this->metaKeyword = $metaKeyword;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedAtValue() {
-        $this->setUpdatedAt(new \DateTime());
+
+    public function updatedTimestamps()
+    {
+        $this->updatedAt = new \DateTime('now');
+        if ($this->createdAt === null) {
+            $this->createdAt = new \DateTime('now');
+        }
     }
+
 
     public function __toString()
     {

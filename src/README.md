@@ -11,24 +11,6 @@ mtt_easy_page_bundle:
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 ```
-##app/config/services.yml example:
-
-```
-   mtt_easypage.slugger.service:
-        class: Mtt\EasyPageBundle\Service\Slugger
-        arguments:
-            - '@cocur_slugify'
-            - '@router.default'
-
-   mtt_easypage.page.service:
-        class: Mtt\EasyPageBundle\Service\Page
-        arguments:
-            - '@doctrine.orm.entity_manager'
-            - '@mtt_easypage.slugger.service'
-            - '%mtt_easy_page.page_entity%'
-        public: true
-
-```
 
 
 ##app/config/config.yml example:
