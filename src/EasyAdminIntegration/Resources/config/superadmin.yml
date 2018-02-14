@@ -17,4 +17,4 @@ easy_admin:
                     - pageTemplate
                     - { property: 'mainImageFile', type: 'vich_image' }
             list:
-                fields: ['id', { property: 'mainImage', template: '@easypage_templates\easy_admin\vich_uploader_image.html.twig', base_path: '%app.path.easypage_images%' },'name', 'active']
+                fields: ['id', { property: 'mainImage', template: '@easypage_templates\easy_admin\vich_uploader_image.html.twig', base_path: '%app.path.easypage_images%' },'name', 'parent', 'active']

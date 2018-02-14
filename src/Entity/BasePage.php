@@ -2,6 +2,8 @@
 
 namespace Mtt\EasyPageBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -15,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 abstract class BasePage implements PageEntityInterface
 {
-
+    const PAGE_PARAM_ALIAS = 'mtt_easy_page.page_entity';
     const ACTIVE = 1;
     /**
      * @var integer
@@ -33,12 +35,7 @@ abstract class BasePage implements PageEntityInterface
      */
     protected $name;
 
-    /**
-     * One Page has One parent Page.
-     * @ORM\OneToOne(targetEntity="Mtt\EasyPageBundle\Entity\PageEntityInterface")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     */
-    protected $parent;
+
 
     /**
      * @var boolean
@@ -141,11 +138,45 @@ abstract class BasePage implements PageEntityInterface
      */
     protected $mainImageFile;
 
+    /**
+     * One Page has One parent Page.
+     * @ORM\ManyToOne(targetEntity="Mtt\EasyPageBundle\Entity\PageEntityInterface", inversedBy="childs")
+     */
+    protected $parent;
+
+    /**
+     * One Page has One parent Page.
+     * @ORM\OneToMany(targetEntity="Mtt\EasyPageBundle\Entity\PageEntityInterface", mappedBy="parent", fetch="EXTRA_LAZY")
+     */
+    protected $childs;
 
     public function __construct()
     {
-
+        $this->childs = new ArrayCollection();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getChilds():?Collection
+    {
+        return $this->childs;
+    }
+
+    /**
+     * @param mixed $childs
+     */
+    public function setChilds(array $childs)
+    {
+        foreach ($childs as $child){
+            $this->addChild($child);
+        }
+    }
+
+    public function addChild(PageEntityInterface $child){
+        $this->childs->add($child);
+    }
+
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance

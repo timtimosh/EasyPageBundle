@@ -5,6 +5,7 @@ namespace Mtt\EasyPageBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use \Mtt\EasyPageBundle\Entity\BasePage as BasePageEntity;
+use Mtt\EasyPageBundle\Entity\PageEntityInterface;
 
 class BasePageRepository extends EntityRepository
 {
@@ -22,18 +23,15 @@ class BasePageRepository extends EntityRepository
         return $qb->getQuery();
     }
 
-    public function findOneActiveBySlug($slug){
+    public function findOneActiveBySlug(string $slug):?PageEntityInterface{
 
         $qb = $this->createPageQuery();
         $this->activeQuery($qb);
 
         $qb->andWhere('p.slug = :slug');
         $qb->setParameter('slug', $slug);
-
         $qb->setMaxResults(1);
-
-        $result = $qb->getQuery()->getOneOrNullResult();
-        return $result;
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
