@@ -4,7 +4,31 @@ There is no admin dashboard for this bundle. It has intergration with EasyAdminB
 ## Install
 Here we go.. install it via composer...
 
-### Basic configuration 
+Create a PageBundle and PageEntity inside, example: 
+
+
+```
+<?php
+namespace PageBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Tymosh\EasyPageBundle\Entity\BasePage;
+
+/**
+ * @ORM\Table(name="tymosh_easypage_page", uniqueConstraints={@ORM\UniqueConstraint(name="idx_UNIQUE_slug", columns={"slug"})})
+ * @ORM\Entity(repositoryClass="Tymosh\EasyPageBundle\Repository\BasePageRepository")
+ * @ORM\EntityListeners({"Tymosh\EasyPageBundle\Listeners\Doctrine\PageListener"})
+ */
+class Page extends BasePage
+{
+
+
+}
+```
+
+**run**: bin/console doctrine:schema:update --force
+
+## Basic configuration 
 
 ### app/config/routing.yml:
 
@@ -18,11 +42,11 @@ _liip_imagine:
 ```
 
 
-### app/config/config.yml example:
+### app/config/config.yml:
  
 ```
 parameters:
-    app.path.easypage_images: '/uploads/images/mtt_easypage'
+    app.path.easypage_images: '/uploads/images/tymosh_easypage'
     
 twig:
     globals:
