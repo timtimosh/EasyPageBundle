@@ -1,7 +1,14 @@
-# Here we go..Basic configuration 
-First pay your attention on ckeeditor bundle https://packagist.org/packages/egeloen/ckeditor-bundle and how to install it
+## Info
+There is no admin dashboard for this bundle. It has intergration with EasyAdminBundle from the box, or you can integrate it with any other by yourself. There is no edit or new route from box, only the entity with listener and service for using slug etc.
 
-## app/config/routing.yml:
+## Install
+Here we go..
+
+### Basic configuration 
+First pay your attention on ckeeditor bundle https://packagist.org/packages/egeloen/ckeditor-bundle and how to install it. 
+
+
+### app/config/routing.yml:
 
 ```
 tymosh_easy_page_bundle:
@@ -13,7 +20,7 @@ _liip_imagine:
 ```
 
 
-## app/config/config.yml example:
+### app/config/config.yml example:
  
 ```
 parameters:
@@ -57,7 +64,7 @@ liip_imagine:
                 thumbnail: { size: [300, 250], mode: outbound }
 ```
 
-# AppKernel:
+### AppKernel:
         ``` 
         $bundles[] = new Tymosh\EasyPageBundle\TymoshEasyPageBundle();
         
