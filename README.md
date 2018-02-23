@@ -2,11 +2,9 @@
 There is no admin dashboard for this bundle. It has intergration with EasyAdminBundle from the box, or you can integrate it with any other by yourself. There is no edit or new route from box, only the entity with listener and service for using slug etc.
 
 ## Install
-Here we go..
+Here we go.. install it via composer...
 
 ### Basic configuration 
-First pay your attention on ckeeditor bundle https://packagist.org/packages/egeloen/ckeditor-bundle and how to install it. 
-
 
 ### app/config/routing.yml:
 
@@ -64,7 +62,7 @@ liip_imagine:
                 thumbnail: { size: [300, 250], mode: outbound }
 ```
 
-### AppKernel:
+## AppKernel:
         ``` 
         $bundles[] = new Tymosh\EasyPageBundle\TymoshEasyPageBundle();
         
@@ -76,3 +74,5 @@ liip_imagine:
         
         $bundles[] = new YourBundle\PageBundle();
         ```
+## Wysiwyg configuring
+Pay your attention on ckeeditor bundle https://packagist.org/packages/egeloen/ckeditor-bundle and how to install it. It will be installed by easypage composer require. But it needs additional work to configure it properly, such as installing assets and configuring wysiwyg panel for your needs.
