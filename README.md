@@ -1,7 +1,7 @@
-#Here we go..Basic configuration 
+# Here we go..Basic configuration 
 First pay your attention on ckeeditor bundle https://packagist.org/packages/egeloen/ckeditor-bundle and how to install it
 
-##app/config/routing.yml:
+## app/config/routing.yml:
 
 ```
 tymosh_easy_page_bundle:
@@ -13,7 +13,7 @@ _liip_imagine:
 ```
 
 
-##app/config/config.yml example:
+## app/config/config.yml example:
  
 ```
 parameters:
@@ -57,12 +57,15 @@ liip_imagine:
                 thumbnail: { size: [300, 250], mode: outbound }
 ```
 
-
-#AppKernel:
+# AppKernel:
         ``` 
         $bundles[] = new Tymosh\EasyPageBundle\TymoshEasyPageBundle();
+        
         $bundles[] = new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle();
+        
         $bundles[] = new Vich\UploaderBundle\VichUploaderBundle();
+        
         $bundles[] = new Liip\ImagineBundle\LiipImagineBundle();
+        
         $bundles[] = new YourBundle\PageBundle();
         ```
