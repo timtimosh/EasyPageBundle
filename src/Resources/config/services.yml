@@ -1,27 +1,27 @@
 services:
-   mtt_easypage.page.service:
-        class: Mtt\EasyPageBundle\Service\PageService
+   tymosh_easypage.page.service:
+        class: Tymosh\EasyPageBundle\Service\PageService
         arguments:
-               - '%mtt_easy_page.page_entity%'
+               - '%tymosh_easy_page.page_entity%'
                - '@router.default'
 
-   mtt_easypage.page_repository:
+   tymosh_easypage.page_repository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
-            - '%mtt_easy_page.page_entity%'
+            - '%tymosh_easy_page.page_entity%'
         lazy: true
 
-   mtt_easypage.doctrine.page_listener:
-        class: Mtt\EasyPageBundle\Listeners\Doctrine\PageListener
+   tymosh_easypage.doctrine.page_listener:
+        class: Tymosh\EasyPageBundle\Listeners\Doctrine\PageListener
         arguments:
             - '@cocur_slugify'
         tags:
             - { name: doctrine.orm.entity_listener }
 
-   mtt_easypage.page_controller:
-        class: Mtt\EasyPageBundle\Controller\PageController
+   tymosh_easypage.page_controller:
+        class: Tymosh\EasyPageBundle\Controller\PageController
         tags: ['controller.service_arguments']
         arguments:
           - '@knp_paginator'
-          - '@mtt_easypage.page_repository'
+          - '@tymosh_easypage.page_repository'

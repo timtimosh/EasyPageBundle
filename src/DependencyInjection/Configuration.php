@@ -1,6 +1,6 @@
 <?php
 
-namespace Mtt\EasyPageBundle\DependencyInjection;
+namespace Tymosh\EasyPageBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('mtt_easy_page');
+        $rootNode = $treeBuilder->root('tymosh_easy_page');
 
         $rootNode
             ->children()

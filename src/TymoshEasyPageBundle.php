@@ -1,14 +1,14 @@
 <?php
 
-namespace Mtt\EasyPageBundle;
+namespace Tymosh\EasyPageBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Mtt\EasyPageBundle\DependencyInjection\Compiler\DoctrineResolveTargetEntityPass;
+use Tymosh\EasyPageBundle\DependencyInjection\Compiler\DoctrineResolveTargetEntityPass;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
-class MttEasyPageBundle extends Bundle
+class TymoshEasyPageBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mtt\EasyPageBundle\Service;
+namespace Tymosh\EasyPageBundle\Service;
 
 
-use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use Tymosh\EasyPageBundle\Entity\PageEntityInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 

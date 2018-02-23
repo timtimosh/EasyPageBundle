@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Mtt\EasyPageBundle\Entity;
+namespace Tymosh\EasyPageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  *
  * @ORM\Entity()
- * @ORM\Table(name="mtt_easypages_custom_fields")
+ * @ORM\Table(name="tymosh_easypages_custom_fields")
  */
 class CustomPageFields
 {

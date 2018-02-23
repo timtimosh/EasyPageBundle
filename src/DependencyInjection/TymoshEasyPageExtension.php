@@ -1,9 +1,9 @@
 <?php
 
-namespace Mtt\EasyPageBundle\DependencyInjection;
+namespace Tymosh\EasyPageBundle\DependencyInjection;
 
-use Mtt\EasyPageBundle\Entity\BasePage;
-use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use Tymosh\EasyPageBundle\Entity\BasePage;
+use Tymosh\EasyPageBundle\Entity\PageEntityInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\Processor;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class MttEasyPageExtension extends Extension implements PrependExtensionInterface
+class TymoshEasyPageExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}

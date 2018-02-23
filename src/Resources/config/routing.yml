@@ -1,7 +1,7 @@
 easypage_list:
     path:  /
-    defaults: { _controller: mtt_easypage.page_controller:listAction }
+    defaults: { _controller: tymosh_easypage.page_controller:listAction }
 
 easypage_show:
     path:  /{slug}
-    defaults: { _controller: mtt_easypage.page_controller:showAction }
+    defaults: { _controller: tymosh_easypage.page_controller:showAction }

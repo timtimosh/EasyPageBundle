@@ -1,5 +1,5 @@
 <?php
-namespace Mtt\EasyPageBundle\DependencyInjection\Compiler;
+namespace Tymosh\EasyPageBundle\DependencyInjection\Compiler;
 
 use Doctrine\ORM\Version;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -16,7 +16,7 @@ class DoctrineResolveTargetEntityPass implements CompilerPassInterface
         $definition = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
 
         $interfaces = [
-            'Mtt\EasyPageBundle\Entity\PageEntityInterface' => $container->getParameter('mtt_easy_page.page_entity')
+            'Tymosh\EasyPageBundle\Entity\PageEntityInterface' => $container->getParameter('Tymosh_easy_page.page_entity')
         ];
 
         foreach ($interfaces as $entityInterface => $resolvedClass){

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mtt\EasyPageBundle\Entity;
+namespace Tymosh\EasyPageBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -134,27 +134,27 @@ abstract class BasePage implements PageEntityInterface
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * @Vich\UploadableField(mapping="mtt_easypage_image", fileNameProperty="mainImage")
+     * @Vich\UploadableField(mapping="tymosh_easypage_image", fileNameProperty="mainImage")
      * @var File
      */
     protected $mainImageFile;
 
     /**
      * One Page has One parent Page.
-     * @ORM\ManyToOne(targetEntity="Mtt\EasyPageBundle\Entity\PageEntityInterface", inversedBy="childs")
+     * @ORM\ManyToOne(targetEntity="Tymosh\EasyPageBundle\Entity\PageEntityInterface", inversedBy="childs")
      */
     protected $parent;
 
     /**
      * One Page has One parent Page.
-     * @ORM\OneToMany(targetEntity="Mtt\EasyPageBundle\Entity\PageEntityInterface", mappedBy="parent", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Tymosh\EasyPageBundle\Entity\PageEntityInterface", mappedBy="parent", fetch="EXTRA_LAZY")
      */
     protected $childs;
 
     /**
      * One Page may have many custom fields
-     * @ORM\ManyToMany(targetEntity="Mtt\EasyPageBundle\Entity\CustomPageFields", fetch="EXTRA_LAZY")
-     * @ORM\JoinTable(name="mtt_easypages_pages_to_custom_fields")
+     * @ORM\ManyToMany(targetEntity="Tymosh\EasyPageBundle\Entity\CustomPageFields", fetch="EXTRA_LAZY")
+     * @ORM\JoinTable(name="tymosh_easypages_pages_to_custom_fields")
      * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $customFields;

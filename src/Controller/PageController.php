@@ -1,11 +1,11 @@
 <?php
 
-namespace Mtt\EasyPageBundle\Controller;
+namespace Tymosh\EasyPageBundle\Controller;
 
-use Mtt\EasyPageBundle\Repository\BasePageRepository;
+use Tymosh\EasyPageBundle\Repository\BasePageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use Tymosh\EasyPageBundle\Entity\PageEntityInterface;
 use \Knp\Component\Pager\PaginatorInterface;
 
 

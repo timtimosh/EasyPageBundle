@@ -1,11 +1,11 @@
 #Here we go..Basic configuration 
-##you also may need to pay tour attention on ckeeditor bundle and how to install it
+First pay your attention on ckeeditor bundle https://packagist.org/packages/egeloen/ckeditor-bundle and how to install it
 
 ##app/config/routing.yml:
 
 ```
-mtt_easy_page_bundle:
-    resource: "@MttEasyPageBundle/Resources/config/routing.yml"
+tymosh_easy_page_bundle:
+    resource: "@TymoshEasyPageBundle/Resources/config/routing.yml"
     prefix:   /pages
 
 _liip_imagine:
@@ -16,31 +16,26 @@ _liip_imagine:
 ##app/config/config.yml example:
  
 ```
+parameters:
+    app.path.easypage_images: '/uploads/images/mtt_easypage'
+    
 twig:
     globals:
-        easypage_service: "@mtt_easypage.page.service"
+        easypage_service: "@tymosh_easypage.page.service"
     paths:
-         '%kernel.project_dir%/vendor/mtt/easy-page-bundle/src/Resources/views': easypage_templates
+         '%kernel.project_dir%/vendor/tymosh/easy-page-bundle/src/Resources/views': easypage_templates
 
-mtt_easy_page:
-    page_entity: YOURNAMESPACE\EasyPageBundle\Entity\Page
+tymosh_easy_page:
+    page_entity: YourBundle\Entity\Page
     easy_admin_integration: true
-
-ivory_ck_editor:
-    configs:
-        my_config:
-            toolbar: full
 
 vich_uploader:
     db_driver: orm # or mongodb or propel or phpcr
     mappings:
-        mtt_easypage_image:
+        tymosh_easypage_image:
             uri_prefix: '%app.path.easypage_images%'
-            upload_destination: '%kernel.project_dir%/web/uploads/images/mtt_easypage'
-        mtt_catalog_product_image:
-            uri_prefix: /uploads/images/mtt_catalog/product
-            upload_destination: '%kernel.project_dir%/web/uploads/images/mtt_catalog_product'
-
+            upload_destination: '%kernel.project_dir%/web/uploads/images/Tymosh_easypage'
+        
 knp_paginator:
     page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
     template:
@@ -65,9 +60,9 @@ liip_imagine:
 
 #AppKernel:
         ``` 
-        $bundles[] = new Mtt\EasyPageBundle\MttEasyPageBundle();
+        $bundles[] = new Tymosh\EasyPageBundle\TymoshEasyPageBundle();
         $bundles[] = new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle();
         $bundles[] = new Vich\UploaderBundle\VichUploaderBundle();
         $bundles[] = new Liip\ImagineBundle\LiipImagineBundle();
-        $bundles[] = new YOURNAMESPACE\EasyPageBundle\YOURNAMESPACEEasyPageBundle();
+        $bundles[] = new YourBundle\PageBundle();
         ```

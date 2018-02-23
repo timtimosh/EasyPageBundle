@@ -1,11 +1,11 @@
 <?php
 
-namespace Mtt\EasyPageBundle\Repository;
+namespace Tymosh\EasyPageBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use \Mtt\EasyPageBundle\Entity\BasePage as BasePageEntity;
-use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use \Tymosh\EasyPageBundle\Entity\BasePage as BasePageEntity;
+use Tymosh\EasyPageBundle\Entity\PageEntityInterface;
 
 class BasePageRepository extends EntityRepository
 {

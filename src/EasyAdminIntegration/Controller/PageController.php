@@ -1,6 +1,6 @@
 <?php
 
-namespace Mtt\EasyPageBundle\EasyAdminIntegration\Controller;
+namespace Tymosh\EasyPageBundle\EasyAdminIntegration\Controller;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
@@ -14,7 +14,7 @@ class PageController extends BaseAdminController
 
 
     /**
-     * @param $entity \Mtt\EasyPageBundle\Entity\BasePage
+     * @param $entity \Tymosh\EasyPageBundle\Entity\BasePage
      * @inheritdoc
      */
     protected function createPagesEntityForm($entity, $entityProperties, $view)
@@ -38,11 +38,11 @@ class PageController extends BaseAdminController
 
 
     /**
-     * @return \Mtt\EasyPageBundle\Service\PageService
+     * @return \Tymosh\EasyPageBundle\Service\PageService
      */
 
 /*    protected function getPageService(){
-        return $this->get('mtt_easypage.page.service');
+        return $this->get('Tymosh_easypage.page.service');
     }*/
 
 }

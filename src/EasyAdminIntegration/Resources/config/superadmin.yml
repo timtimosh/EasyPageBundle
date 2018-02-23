@@ -1,8 +1,8 @@
 easy_admin:
     entities:
         Pages:
-            class: '%mtt_easy_page.page_entity%'
-            controller: Mtt\EasyPageBundle\EasyAdminIntegration\Controller\PageController
+            class: '%Tymosh_easy_page.page_entity%'
+            controller: Tymosh\EasyPageBundle\EasyAdminIntegration\Controller\PageController
             form:  # <-- 'form' is applied to both 'new' and 'edit' views
                 fields:
                     - name

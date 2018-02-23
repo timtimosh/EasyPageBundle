@@ -1,6 +1,6 @@
 <?php
 
-namespace Mtt\EasyPageBundle\Tests\Controller;
+namespace Tymosh\EasyPageBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

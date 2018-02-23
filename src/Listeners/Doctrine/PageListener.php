@@ -1,11 +1,11 @@
 <?php
 
-namespace Mtt\EasyPageBundle\Listeners\Doctrine;
+namespace Tymosh\EasyPageBundle\Listeners\Doctrine;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Mtt\EasyPageBundle\Entity\BasePage;
-use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use Tymosh\EasyPageBundle\Entity\BasePage;
+use Tymosh\EasyPageBundle\Entity\PageEntityInterface;
 
 
 class PageListener
