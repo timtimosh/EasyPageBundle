@@ -16,5 +16,6 @@ easy_admin:
                     - listTemplate
                     - pageTemplate
                     - { property: 'mainImageFile', type: 'vich_image' }
+                    - customFields
             list:
                 fields: ['id', { property: 'mainImage', template: '@easypage_templates\easy_admin\vich_uploader_image.html.twig', base_path: '%app.path.easypage_images%' },'name', 'parent', 'active']

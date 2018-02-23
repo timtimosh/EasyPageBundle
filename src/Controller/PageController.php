@@ -2,38 +2,31 @@
 
 namespace Mtt\EasyPageBundle\Controller;
 
-use Mtt\EasyPageBundle\Entity\BasePage;
 use Mtt\EasyPageBundle\Repository\BasePageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\View\TwitterBootstrap3View;
-
 use Mtt\EasyPageBundle\Entity\PageEntityInterface;
+use \Knp\Component\Pager\PaginatorInterface;
 
-/**
- * Page controller.
- *
- */
+
 class PageController extends Controller
 {
-    protected function getLimit()
+    protected $paginator;
+    protected $pageRepository;
+
+    public function __construct(PaginatorInterface $paginator, BasePageRepository $pageRepository)
     {
-        return 10;
+        $this->paginator = $paginator;
+        $this->pageRepository = $pageRepository;
     }
 
     /**
      * Lists all Page entities.
-     *
      */
     public function listAction(Request $request)
     {
-        $paginator = $this->get('knp_paginator');
-
-        $pagination = $paginator->paginate(
-            $this->getPageRepository()->findActive(), /* query NOT result */
+        $pagination = $this->paginator->paginate(
+            $this->pageRepository->findActive(), /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $this->getLimit()/*limit per page*/
         );
@@ -45,13 +38,11 @@ class PageController extends Controller
     }
 
     /**
-     * Finds and displays a Page entity.
-     * @var $page BasePage
-     *
+     * Finds and displays Page entity.
      */
-    public function showAction($slug)
+    public function showAction(string $slug)
     {
-        $page = $this->getPageRepository()->findOneActiveBySlug($slug);
+        $page = $this->pageRepository->findOneActiveBySlug($slug);
         if (!$page) {
             throw $this->createNotFoundException('The page does not exist');
         }
@@ -61,23 +52,17 @@ class PageController extends Controller
         ));
     }
 
-    protected function getSinglePageTemplate($page):string {
-        if (null === $page->getPageTemplate() || '' === $page->getPageTemplate()) {
-            $view = '@easypage_templates/show.html.twig';
-        } else {
-            $view = $page->getPageTemplate();
-        }
-        return $view;
-    }
-
-    /**
-     * @return BasePageRepository
-     */
-    protected function getPageRepository()
+    protected function getSinglePageTemplate(PageEntityInterface $page): string
     {
-        $em = $this->getDoctrine()->getManager();
-        $pageEntity = $this->getParameter('mtt_easy_page.page_entity');
-        return $em->getRepository($pageEntity);
+        if (null === $page->getPageTemplate() || '' === $page->getPageTemplate()) {
+            return '@easypage_templates/show.html.twig';
+        } else {
+            return $page->getPageTemplate();
+        }
     }
 
+    protected function getLimit()
+    {
+        return 10;
+    }
 }

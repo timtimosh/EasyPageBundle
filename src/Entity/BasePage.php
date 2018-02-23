@@ -11,13 +11,14 @@ use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ *
  * @ORM\MappedSuperclass
  * @Vich\Uploadable
  */
 
 abstract class BasePage implements PageEntityInterface
 {
-    const PAGE_PARAM_ALIAS = 'mtt_easy_page.page_entity';
+
     const ACTIVE = 1;
     /**
      * @var integer
@@ -150,9 +151,38 @@ abstract class BasePage implements PageEntityInterface
      */
     protected $childs;
 
+    /**
+     * One Page may have many custom fields
+     * @ORM\ManyToMany(targetEntity="Mtt\EasyPageBundle\Entity\CustomPageFields", fetch="EXTRA_LAZY")
+     * @ORM\JoinTable(name="mtt_easypages_pages_to_custom_fields")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    protected $customFields;
+
+    /**
+     * @return mixed
+     */
+    public function getCustomFields():?Collection
+    {
+        return $this->customFields;
+    }
+
+    /**
+     * @param mixed $customFields
+     */
+    public function setCustomFields(array $customFields)
+    {
+        $this->customFields->clear();
+        foreach ($customFields as $customField){
+            $this->customFields->add($customField);
+        }
+    }
+
+
     public function __construct()
     {
         $this->childs = new ArrayCollection();
+        $this->customFields = new ArrayCollection();
     }
 
     /**

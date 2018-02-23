@@ -9,22 +9,19 @@ use Mtt\EasyPageBundle\Entity\PageEntityInterface;
 
 class BasePageRepository extends EntityRepository
 {
-    public function findActive($limit = 0, $execute = false)
+    public function findActive($limit = 0)
     {
         $qb = $this->createPageQuery();
         $this->activeQuery($qb);
 
-        if($limit){
+        if ($limit) {
             $qb->setMaxResults($limit);
-        }
-        if($execute){
-            return $qb->getQuery()->execute();
         }
         return $qb->getQuery();
     }
 
-    public function findOneActiveBySlug(string $slug):?PageEntityInterface{
-
+    public function findOneActiveBySlug(string $slug): ?PageEntityInterface
+    {
         $qb = $this->createPageQuery();
         $this->activeQuery($qb);
 
@@ -37,13 +34,15 @@ class BasePageRepository extends EntityRepository
     /**
      * @param $qb QueryBuilder
      */
-    protected function activeQuery($qb){
+    protected function activeQuery($qb)
+    {
         $qb->where('p.active = :active');
         // ->andWhere('f.end <= :end')
         $qb->setParameter('active', BasePageEntity::ACTIVE);
     }
 
-    protected function createPageQuery(){
+    protected function createPageQuery()
+    {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('p')
             ->from($this->_entityName, 'p');

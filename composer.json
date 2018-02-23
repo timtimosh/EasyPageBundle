@@ -1,6 +1,8 @@
 {
-    "name": "mtt/easy-page-bundle",
-    "description": "symfony easy page bundle",
+    "name": "tymosh/easy-page-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "description": "symfony content bundle",
     "authors": [
         {
             "name": "tymosh",
@@ -18,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mtt\\EasyPageBundle\\": "src/"
+            "Tymosh\\EasyPageBundle\\": "src/"
         }
     }
 }

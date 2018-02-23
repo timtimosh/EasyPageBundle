@@ -3,6 +3,7 @@
 namespace Mtt\EasyPageBundle\DependencyInjection;
 
 use Mtt\EasyPageBundle\Entity\BasePage;
+use Mtt\EasyPageBundle\Entity\PageEntityInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,7 +17,7 @@ use Symfony\Component\Config\Definition\Processor;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class MttEasyPageExtension  extends Extension implements PrependExtensionInterface, CompilerPassInterface
+class MttEasyPageExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +33,7 @@ class MttEasyPageExtension  extends Extension implements PrependExtensionInterfa
         $configs = $container->getExtensionConfig($this->getAlias());
         $myBundleConfig = $this->processConfiguration(new Configuration(), $configs);
 
-        $container->setParameter(BasePage::PAGE_PARAM_ALIAS, $myBundleConfig['page_entity']);
+        $container->setParameter(PageEntityInterface::PAGE_PARAM_ALIAS, $myBundleConfig['page_entity']);
 
         if(isset($myBundleConfig['easy_admin_integration'])) {
             $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../EasyAdminIntegration/Resources/config'));
@@ -40,12 +41,4 @@ class MttEasyPageExtension  extends Extension implements PrependExtensionInterfa
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * process() is called after all extensions are loaded
-     */
-    public function process(ContainerBuilder $container)
-    {
-
-    }
 }
